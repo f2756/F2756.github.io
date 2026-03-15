@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>历史作业开始页</title>
+    <style>
+        :root {
+            --bg: #f4efe6;
+            --text: #2f241d;
+            --accent: #9f5a2f;
+            --accent-dark: #7b4320;
+            --line: rgba(71, 46, 29, 0.12);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Microsoft YaHei", "Noto Serif SC", serif;
+            color: var(--text);
+            background:
+                radial-gradient(circle at top, rgba(197, 148, 101, 0.22), transparent 36%),
+                linear-gradient(180deg, #ede1cd 0%, var(--bg) 38%, #f8f3ea 100%);
+        }
+
+        .home {
+            width: min(1180px, calc(100% - 32px));
+            margin: 0 auto;
+            padding: 28px 0 48px;
+        }
+
+        .home-top-gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-bottom: 34px;
+        }
+
+        .top-card {
+            position: relative;
+            min-height: 220px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.45);
+        }
+
+        .top-card img,
+        .home-middle img,
+        .scroll-track img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .top-card::after,
+        .home-middle::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(34, 22, 16, 0.02), rgba(34, 22, 16, 0.42));
+        }
+
+        .top-card span {
+            position: absolute;
+            left: 18px;
+            bottom: 16px;
+            z-index: 1;
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: rgba(255, 248, 236, 0.78);
+            backdrop-filter: blur(8px);
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+
+        .home-middle {
+            position: relative;
+            height: 340px;
+            border-radius: 28px;
+            overflow: hidden;
+            margin-bottom: 34px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .home-middle-button {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 0 54px;
+            color: #fffaf3;
+        }
+
+        .home-middle-button h1 {
+            margin: 0 0 12px;
+            font-size: clamp(30px, 5vw, 52px);
+            line-height: 1.08;
+        }
+
+        .home-middle-button p {
+            margin: 0 0 22px;
+            max-width: 480px;
+            font-size: 16px;
+            line-height: 1.7;
+            color: rgba(255, 250, 243, 0.92);
+        }
+
+        .home-middle-button button {
+            border: 0;
+            border-radius: 999px;
+            padding: 14px 28px;
+            font-size: 15px;
+            font-weight: 700;
+            color: #fff8ef;
+            background: linear-gradient(135deg, var(--accent), #c77b45);
+            cursor: pointer;
+            box-shadow: 0 12px 24px rgba(88, 46, 22, 0.3);
+            transition: transform 0.2s ease, background 0.2s ease;
+            align-self: center;
+        }
+
+        .home-middle-button button:hover {
+            transform: translateY(-2px);
+            background: linear-gradient(135deg, #b66636, var(--accent-dark));
+        }
+
+        .scroll-section {
+            padding: 24px 0;
+            overflow: hidden;
+        }
+
+        .scroll-wrap {
+            overflow: hidden;
+            padding: 16px 0;
+
+        }
+
+        .scroll-track {
+            display: flex;
+            width: max-content;
+            animation: move 24s linear infinite;
+        }
+
+        .scroll-wrap:hover .scroll-track {
+            animation-play-state: paused;
+        }
+
+        .scroll-item {
+            width: 240px;
+            height: 160px;
+            margin-right: 16px;
+            border-radius: 18px;
+            overflow: hidden;
+            flex: 0 0 auto;
+            border: 1px solid rgba(80, 51, 31, 0.12);
+        }
+
+        .scroll-item img {
+            transition: transform 0.25s ease;
+        }
+
+        .scroll-item:hover img {
+            transform: scale(1.04);
+        }
+
+        @keyframes move {
+            from {
+                transform: translateX(0);
+            }
+            to {
+                transform: translateX(-50%);
+            }
+        }
+
+        @media (max-width: 840px) {
+            .home-top-gallery {
+                grid-template-columns: 1fr;
+            }
+
+            .home-middle {
+                height: 300px;
+            }
+
+            .home-middle-button {
+                padding: 28px;
+            }
+
+            .home-middle-button p {
+                max-width: none;
+            }
+
+            .scroll-item {
+                width: 200px;
+                height: 136px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="home">
+        <section class="home-top-gallery">
+            <div class="top-card">
+                <img src="https://picsum.photos/id/1040/800/560" alt="历史遗迹图片 1">
+            </div>
+            <div class="top-card">
+                <img src="https://picsum.photos/id/1069/800/560" alt="历史遗迹图片 2">
+            </div>
+            <div class="top-card">
+                <img src="https://picsum.photos/id/1036/800/560" alt="历史遗迹图片 3">
+            </div>
+        </section>
+
+        <hr>
+
+        <section class="home-middle">
+            <img src="https://picsum.photos/id/1015/1600/700" alt="横向长图展示">
+            <div class="home-middle-button">
+                <button type="button">开始浏览</button>
+            </div>
+        </section>
+
+
+        <section class="scroll-section">
+            <div class="scroll-wrap">
+                <div class="scroll-track">
+                    <div class="scroll-item"><img src="resources\img\红军过草地.png" alt="滚动图片 1"></div> <!--https://www.12371.cn/2024/11/19/ARTI1731979792927993.shtml -->
+                    <div class="scroll-item"><img src="resources\img\巧渡金沙江.jpg" alt="滚动图片 2"></div>
+                    <div class="scroll-item"><img src="resources\img\强渡大渡河.jpg" alt="滚动图片 3"></div>
+                    <div class="scroll-item"><img src="resources\img\飞夺泸定桥.png" alt="滚动图片 4"></div>
+                    <div class="scroll-item"><img src="resources\img\红军过雪山.jpg" alt="滚动图片 5"></div>
+                    <div class="scroll-item"><img src="resources\img\三大主力军会师.jpg" alt="滚动图片 6"></div>
+                    <div class="scroll-item"><img src="resources\img\红军过草地.png" alt="滚动图片 1 复制"></div>
+                    <div class="scroll-item"><img src="resources\img\巧渡金沙江.jpg" alt="滚动图片 2 复制"></div>
+                    <div class="scroll-item"><img src="resources\img\强渡大渡河.jpg" alt="滚动图片 3 复制"></div>
+                    <div class="scroll-item"><img src="resources\img\飞夺泸定桥.png" alt="滚动图片 4 复制"></div>
+                    <div class="scroll-item"><img src="resources\img\红军过雪山.jpg" alt="滚动图片 5 复制"></div>
+                    <div class="scroll-item"><img src="resources\img\三大主力军会师.jpg" alt="滚动图片 6 复制"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
