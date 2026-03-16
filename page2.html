@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第二页</title>
+    <link rel="stylesheet" href="css/page2.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <nav class="navbar">
+        <a href="index.html" class="nav-logo">长征精神</a>
+        <ul class="nav-links">
+            <li>
+                <a href="page2.html">历史背景</a>
+                <ul class="submenu">
+                    <li><a href="#">启程</a></li>
+                    <li><a href="#">四渡赤水河</a></li>
+                    <li><a href="#">巧渡金沙江</a></li>
+                    <li><a href="#">飞夺泸定桥</a></li>
+                    <li><a href="#">过雪山、过草地</a></li>
+                    <li><a href="#">会宁会师</a></li>
+                </ul>
+            </li>
+            <li><a href="#">重要战役</a></li>
+            <li><a href="#">精神传承</a></li>
+        </ul>
+    </nav>
+    <!-- 侧边路线图 -->
+    <div class="route-wrapper">
+        <div class="route-img">
+            <img src="resources/img/长征路线图1.jpg">
+            <svg class="route-line" viewBox="0 0 1255 900">
+                <path d="M1033.5 807.5C815.5 918.5 594.4 736.1 560 714.5L516 685.5C539 843 369.5 776 319 776V572C382.6 559.2 350.833 526.333 327 511.5C361 447.1 377.833 387 382 365C437.6 318.6 472.833 248.333 483.5 219" fill="transparent" stroke="#a33" stroke-width="4" stroke-dasharray="16 8" id="route-path" />
+                <g class="moving-star" id="star-group">
+                    <image href="resources/img/红星.png" x="-15" y="-15" width="30" height="30" />
+                    <text x="0" y="35" fill="black" font-size="18" font-weight="bold" text-anchor="middle">
+                        中央红军
+                    </text>
+                </g>
+            </svg>
+        </div>
+        <button class="route-btn">查看路线图</button>
+    </div>
+    <audio id="bg-music" src="resources/audio/五四特别版错位时空.m4a" loop></audio>
+    <!-- 内容部分 -->
+    <!--四渡赤水河视频-->
+    <div class="video-wrapper">
+        <p>待定</p>
+        <video id="sidu-video" src="resources/video/待定.mp4" muted loop></video>
+    </div>
+    <!--正文-->
+    <main class="main-content">
+        <div class="first-content">
+            <span class="chapter-title">启程</span>
+            <article class="article-qicheng">
+                <div class="main-card" id="card1">
+                    <img src="resources/img/待定.png" alt="长征出发">
+                    <div class="card-content">
+                        <h3>启程 · 告别瑞金</h3>
+                        <p>1934年10月，第五次反“围剿”失败。中央红军主力8.6万人趁着夜色跨过于都河，被迫实行战略转移。没有欢送，只有夜色与秋风，这是一场向着未知的悲壮远征，却意外成为了中国命运的伟大转折。</p>
+                    </div>
+                </div>
+                <div class="text-content">
+                    <p>90年前的那个秋夜，平均年龄不到20岁的红军战士背上草鞋，踏上未知的漫漫征途。</p>
+                    <p>今天，同样正值青春的我们，站在时代的交汇点上回望。他们的长征已经胜利，而属于我们这代人的“突围”与“长征”，又将从哪里启程？</p>
+                    <div class="slider-container">
+                        <div class="slider-track">
+                            <div class="slider-bg"></div>
+                            <span class="slider-text">滑动重探先辈足迹 &gt;&gt;</span>
+                            <div class="slider-handle"></div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+        <div class="follow-content" id="follow-article">
+            <span class="chapter-title">四渡赤水河</span>
+            <article class="article-sidu">
+                <div class="main-card" id="card1">
+                    <img src="resources/img/待定.png" alt="长征出发">
+                    <div class="card-content">
+                        <h3>四渡赤水 · 伟人的“神来之笔”</h3>
+                        <p>一场 3 万人对抗 40 万人的绝地反击。在川黔滇交界的崇山峻岭中，红军以高度的机动性，穿插迂回，硬生生在敌人的铜墙铁壁中撕开了一条生路。</p>
+                    </div>
+                </div>
+                <h3 class="article-subtitle">兵力对比</h3>
+                <div class="strength-comparison">
+                    <div class="strength-card red-army">
+                        <div class="army-label">中央红军</div>
+                        <div class="army-number">30,000</div>
+                        <p class="army-desc">装备简陋，刚经历湘江战役惨重损失，急需修整。</p>
+                    </div>
+                    <div class="vs-divider">VS</div>
+                    <div class="strength-card enemy-army">
+                        <div class="army-label">国民党军</div>
+                        <div class="army-number">400,000+</div>
+                        <p class="army-desc">多路合围，蒋介石坐镇贵阳督战，企图毕其功于一役。</p>
+                    </div>
+                </div>
+                <h3 class="article-subtitle">四渡过程</h3>
+                <section class="sticky-scroll-container" id="sidu-detail-section">
+                    <div class="sticky-viewport">
+                        <div class="timeline-container">
+                            <div class="timeline-track">
+                                <div class="timeline-progress" id="scroll-progress-bar"></div>
+                            </div>
+                            <div class="timeline-points">
+                                <div class="point active"><span>一渡</span></div>
+                                <div class="point"><span>二渡</span></div>
+                                <div class="point"><span>三渡</span></div>
+                                <div class="point"><span>四渡</span></div>
+                            </div>
+                        </div>
+                        <div class="sticky-text-area">
+                            <div class="scroll-card active" data-index="0">
+                                <h2>一渡赤水</h2>
+                                <h3>01. 兵围土城，转战扎西</h3>
+                                <p>1935年1月，土城战役中，面对兵力与装备的悬殊差距以及源源不断的敌军后援，毛主席当机立断暂缓北渡长江计划。红军主力挥师向西，一渡赤水，成功拿下云南扎西地区，暂避敌方锋芒。</p>
+                            </div>
+                            <div class="scroll-card" data-index="1">
+                                <h2>二渡赤水</h2>
+                                <h3>02. 出其不意，杀回马枪</h3>
+                                <p>1935年2月18日，红军突然从扎西掉头东进，二渡赤水。这记漂亮的“回马枪”打得贵州军阀措手不及，短短5天接连攻克桐梓、娄山关与遵义，以极小代价取得长征以来的首次大胜！</p>
+                            </div>
+                            <div class="scroll-card" data-index="2">
+                                <h2>三渡赤水</h2>
+                                <h3>03. 大张旗鼓，调虎离山</h3>
+                                <p>1935年3月10日，面对30多万大军围剿，红军凭借破译的敌军密电，避开重兵防御的打鼓新场。随后大张旗鼓向西三渡赤水，以一个团佯装主力诱敌向川南，真正的主力则隐蔽在赤水河畔的深山中伺机而动。</p>
+                            </div>
+                            <div class="scroll-card" data-index="3">
+                                <h2>四渡赤水</h2>
+                                <h3>04. 兵临贵阳，跳出重围</h3>
+                                <p>1935年3月21日，红军主力第四次东渡赤水。部队佯攻遵义，实则南下直逼贵阳，吓得亲自督战的蒋介石急调云南守军救援。红军趁机虚晃一枪，直插兵力空虚的云南，成功渡过金沙江，彻底跳出40万大军的包围圈！</p>
+                            </div>
+                        </div>
+                        <div class="sticky-img-area">
+                            <img src="resources/img/待定.png" class="scroll-img active" data-index="0" alt="兵临江畔">
+                            <img src="resources/img/待定.png" class="scroll-img" data-index="1" alt="夺取渡船">
+                            <img src="resources/img/待定.png" class="scroll-img" data-index="2" alt="七天七夜">
+                            <img src="resources/img/待定.png" class="scroll-img" data-index="3" alt="七天七夜">
+                        </div>
+                    </div>
+                </section>
+                <div class="gap" id="sidu-gap">
+                    <div class="quote-wrapper" id="sidu-quote-container">
+                        <blockquote class="sidu-quote">
+                            <p>长征是独一无二的，长征是无与伦比的。而四渡赤水又是“长征史上最光彩神奇的篇章”。</p>
+                            <cite>哈里森·索尔兹伯里《长征——前所未闻的故事》</cite>
+                        </blockquote>
+                    </div>
+                </div>
+                <div class="blank"></div>
+            </article>
+            <span class="chapter-title">巧渡金沙江</span>
+            <article class="article-qiaodu">
+                <div class="main-card" id="card1">
+                    <img src="resources/img/待定.png" alt="长征出发">
+                    <div class="card-content">
+                        <h3>巧渡金沙江 · 跃出数十万大军重围</h3>
+                        <p>“金沙水拍云崖暖”。金沙江，两侧悬崖峭壁，江水波涛汹涌，是阻挡红军北上的天然绝境。前有天险，后有几十万追兵，红军在这里上演了一场堪称奇迹的“生死大渡河”，从此彻底跳出了敌人的包围圈，掌握了长征的战略主动权。</p>
+                    </div>
+                </div>
+                <div class="data-panel" id="qiaodu-data-panel">
+                    <div class="data-card">
+                        <div class="data-number" data-target="6">0</div>
+                        <div class="data-unit">只</div>
+                        <div class="data-desc">仅靠找到的破旧木船</div>
+                    </div>
+                    <div class="data-card">
+                        <div class="data-number" data-target="37">0</div>
+                        <div class="data-unit">名</div>
+                        <div class="data-desc">当地老船工不眠不休</div>
+                    </div>
+                    <div class="data-card">
+                        <div class="data-number" data-target="7">0</div>
+                        <div class="data-unit">天夜</div>
+                        <div class="data-desc">历经极限往返运输</div>
+                    </div>
+                    <div class="data-card">
+                        <div class="data-number" data-target="30000">0</div>
+                        <div class="data-unit">人+</div>
+                        <div class="data-desc">中央红军全部安全渡江</div>
+                    </div>
+                    <div class="data-card">
+                        <div class="data-number" data-target="0">0</div>
+                        <div class="data-unit">伤亡</div>
+                        <div class="data-desc">奇迹般无一人掉队牺牲</div>
+                    </div>
+                </div>
+                <div class="flip-cards-container">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front" style="background: linear-gradient(135deg, #1e3c72, #2a5298);">
+                                <h2>01</h2>
+                                <h3>虚指昆明</h3>
+                                <p>调虎离山</p>
+                            </div>
+                            <div class="flip-card-back">
+                                <h3>01. 兵临昆明城</h3>
+                                <p>红军摆出攻打昆明的架势，惊得云南军阀龙云急调各地守军回防。这一招“调虎离山”，瞬间让金沙江沿岸兵力空虚，为渡江撕开了防线的缺口。</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front" style="background: linear-gradient(135deg, #134e5e, #71b280);">
+                                <h2>02</h2>
+                                <h3>神兵天降</h3>
+                                <p>抢占渡口</p>
+                            </div>
+                            <div class="flip-card-back">
+                                <h3>02. 奔袭皎平渡</h3>
+                                <p>趁敌人主力回防，红军主力突然掉转锋芒，以每天百余里的极限急行军直扑金沙江。先遣队化装成国军，兵不血刃控制皎平渡，并找到了极为珍贵的6只木船。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front" style="background: linear-gradient(135deg, #1b4f72, #0e6655);">
+                                <h2>03</h2>
+                                <h3>孤舟暗渡</h3>
+                                <p>七天七夜</p>
+                            </div>
+                            <div class="flip-card-back">
+                                <h3>03. 极限的摆渡</h3>
+                                <p>江水急浪高无法架桥。在江岸熊熊篝火照明下，37位老船工歇人不歇船，历经七天七夜的极限奋战，将三万多名红军战士奇迹般地全部送过对岸。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front" style="background: linear-gradient(135deg, #2c3e50, #3498db);">
+                                <h2>04</h2>
+                                <h3>毁船封江</h3>
+                                <p>绝尘而去</p>
+                            </div>
+                            <div class="flip-card-back">
+                                <h3>04. 望江兴叹的追兵</h3>
+                                <p>当十几万追兵气喘吁吁赶到江边时，江面上空空如也，只剩下红军丢弃的破草鞋。隔着汹涌的金沙江，敌军只能望江兴叹，红军自此彻底跳出包围圈！</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <article class="article-qicheng">
+                <div class="main-card" id="card1">
+                    <img src="resources/img/待定.png" alt="长征出发">
+                    <div class="card-content">
+                        <h3>启程 · 告别瑞金</h3>
+                        <p>1934年10月，第五次反“围剿”失败。中央红军主力8.6万人趁着夜色跨过于都河，被迫实行战略转移。没有欢送，只有夜色与秋风，这是一场向着未知的悲壮远征，却意外成为了中国命运的伟大转折。</p>
+                    </div>
+                </div>
+            </article>
+            <article class="article-qicheng">
+                <div class="main-card" id="card1">
+                    <img src="resources/img/待定.png" alt="长征出发">
+                    <div class="card-content">
+                        <h3>启程 · 告别瑞金</h3>
+                        <p>1934年10月，第五次反“围剿”失败。中央红军主力8.6万人趁着夜色跨过于都河，被迫实行战略转移。没有欢送，只有夜色与秋风，这是一场向着未知的悲壮远征，却意外成为了中国命运的伟大转折。</p>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </main>
+    <script src="js/page2.js"></script>
+</body>
+</html>
