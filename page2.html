@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="css/page2.css">
 </head>
 <body>
+    <canvas id="rain-canvas"></canvas>
+    <canvas id="snow-canvas"></canvas>
     <!-- 顶部导航栏 -->
     <nav class="navbar">
         <a href="index.html" class="nav-logo">长征精神</a>
@@ -14,16 +16,15 @@
             <li>
                 <a href="page2.html">历史背景</a>
                 <ul class="submenu">
-                    <li><a href="#">启程</a></li>
-                    <li><a href="#">四渡赤水河</a></li>
-                    <li><a href="#">巧渡金沙江</a></li>
-                    <li><a href="#">飞夺泸定桥</a></li>
-                    <li><a href="#">过雪山、过草地</a></li>
-                    <li><a href="#">会宁会师</a></li>
+                    <li><a href="#chapter1">启程</a></li>
+                    <li><a href="#chapter2">四渡赤水河</a></li>
+                    <li><a href="#chapter3">巧渡金沙江</a></li>
+                    <li><a href="#chapter4">飞夺泸定桥</a></li>
+                    <li><a href="#chapter5">过雪山、过草地</a></li>
+                    <li><a href="#chapter6">会宁会师</a></li>
                 </ul>
             </li>
-            <li><a href="#">重要战役</a></li>
-            <li><a href="#">精神传承</a></li>
+            <li><a href="page3.html">重要战役</a></li>
         </ul>
     </nav>
     <!-- 侧边路线图 -->
@@ -33,10 +34,14 @@
             <svg class="route-line" viewBox="0 0 1255 900">
                 <path d="M1033.5 807.5C815.5 918.5 594.4 736.1 560 714.5L516 685.5C539 843 369.5 776 319 776V572C382.6 559.2 350.833 526.333 327 511.5C361 447.1 377.833 387 382 365C437.6 318.6 472.833 248.333 483.5 219" fill="transparent" stroke="#a33" stroke-width="4" stroke-dasharray="16 8" id="route-path" />
                 <g class="moving-star" id="star-group">
-                    <image href="resources/img/红星.png" x="-15" y="-15" width="30" height="30" />
+                    <image href="resources/icon/红星.png" x="-15" y="-15" width="30" height="30" />
                     <text x="0" y="35" fill="black" font-size="18" font-weight="bold" text-anchor="middle">
                         中央红军
                     </text>
+                    
+                </g>
+                <g class="test" id="test-g">
+                    <image href="resources/icon/红星.png" x="-20" y="-20" width="40" height="40" />
                 </g>
             </svg>
         </div>
@@ -52,7 +57,7 @@
     <!--正文-->
     <main class="main-content">
         <div class="first-content">
-            <span class="chapter-title">启程</span>
+            <h2 class="chapter-title" id="chapter1">启程</h2>
             <article class="article-qicheng">
                 <div class="main-card" id="card1">
                     <img src="resources/img/待定.png" alt="长征出发">
@@ -75,9 +80,9 @@
             </article>
         </div>
         <div class="follow-content" id="follow-article">
-            <span class="chapter-title">四渡赤水河</span>
+            <h2 class="chapter-title" id="chapter2">四渡赤水河</h2>
             <article class="article-sidu">
-                <div class="main-card" id="card1">
+                <div class="main-card" id="card2">
                     <img src="resources/img/待定.png" alt="长征出发">
                     <div class="card-content">
                         <h3>四渡赤水 · 伟人的“神来之笔”</h3>
@@ -142,9 +147,9 @@
                         </div>
                     </div>
                 </section>
-                <div class="gap" id="sidu-gap">
+                <div class="cite-wrapper" id="sidu-gap">
                     <div class="quote-wrapper" id="sidu-quote-container">
-                        <blockquote class="sidu-quote">
+                        <blockquote class="quote">
                             <p>长征是独一无二的，长征是无与伦比的。而四渡赤水又是“长征史上最光彩神奇的篇章”。</p>
                             <cite>哈里森·索尔兹伯里《长征——前所未闻的故事》</cite>
                         </blockquote>
@@ -152,9 +157,9 @@
                 </div>
                 <div class="blank"></div>
             </article>
-            <span class="chapter-title">巧渡金沙江</span>
+            <h2 class="chapter-title" id="chapter3">巧渡金沙江</h2>
             <article class="article-qiaodu">
-                <div class="main-card" id="card1">
+                <div class="main-card" id="card3">
                     <img src="resources/img/待定.png" alt="长征出发">
                     <div class="card-content">
                         <h3>巧渡金沙江 · 跃出数十万大军重围</h3>
@@ -245,24 +250,153 @@
                     </div>
                 </div>
             </article>
-            <article class="article-qicheng">
-                <div class="main-card" id="card1">
+            <h2 class="chapter-title" id="chapter4">飞夺泸定桥</h2>
+            <article class="article-feiduo" id="feiduo-section">
+
+                <div class="main-card" id="card4">
                     <img src="resources/img/待定.png" alt="长征出发">
                     <div class="card-content">
-                        <h3>启程 · 告别瑞金</h3>
-                        <p>1934年10月，第五次反“围剿”失败。中央红军主力8.6万人趁着夜色跨过于都河，被迫实行战略转移。没有欢送，只有夜色与秋风，这是一场向着未知的悲壮远征，却意外成为了中国命运的伟大转折。</p>
+                        <h3>飞夺泸定桥 · 铁索寒风中的生死突击</h3>
+                        <p>“大渡桥横铁索寒”。大渡河，水流湍急如雷，两岸是犹如刀削的悬崖峭壁。前有难以逾越的天险，后有薛岳几十万大军的疯狂追击。红军在这里，不仅要和全副武装的敌人抢时间，更要和人类的生理极限掰手腕。退一步，就是万丈深渊；前进一步，是枪林弹雨。</p>
+                    </div>
+                </div>
+                <div class="luding-speed-section">
+                    <div class="speed-title">昼夜狂奔 <span>240</span> 里</div>
+                    <div class="speed-track">
+                        <div class="speed-progress" id="speed-progress"></div>
+                    </div>
+                    <div class="speed-markers">
+                        <span>接下死命令</span>
+                        <span>暴雨如注</span>
+                        <span>对岸火光</span>
+                        <span>神兵天降</span>
+                    </div>
+                    <p class="speed-desc">为了抢在敌军增援前拿下桥头，红四团在倾盆大雨与极度饥饿中，一昼夜狂奔120公里。没有火把，就摸黑前进；甚至与对岸的敌军隔河并行。这不仅是急行军，更是超越人类生理极限的奇迹。</p>
+                </div>
+
+                <div class="luding-assault-container">
+                    <div class="assault-card">
+                        <div class="chain-decoration"></div>
+                        <h4>抽空的桥板</h4>
+                        <p>长百余米、由13根铁索组成的吊桥，大部分木板已被敌人抽飞。脚下是震耳欲聋、卷起数米高浪花的汹涌江水，连站稳都成奢望。</p>
+                    </div>
+                    <div class="assault-card">
+                        <div class="chain-decoration"></div>
+                        <h4>死亡的火网</h4>
+                        <p>对岸的桥头堡里，敌人的机枪正吐着火舌，交织成密集的火力网，企图将红军彻底阻挡在冰冷的大渡河畔。</p>
+                    </div>
+                    <div class="assault-card highlight">
+                        <div class="chain-decoration"></div>
+                        <h4>血肉的丰碑</h4>
+                        <p>22名勇士将驳壳枪插在腰间，背着马刀和手榴弹，手攀铁索，脚踩铁环，迎着弹雨以血肉之躯一步步蹚开了一条生路！</p>
                     </div>
                 </div>
             </article>
-            <article class="article-qicheng">
-                <div class="main-card" id="card1">
+            <h2 class="chapter-title" id="chapter5">过雪山、过草地</h2>
+            <article class="article-guoxue" id="xueshan-section">
+                <div class="main-card" id="card5">
                     <img src="resources/img/待定.png" alt="长征出发">
                     <div class="card-content">
-                        <h3>启程 · 告别瑞金</h3>
-                        <p>1934年10月，第五次反“围剿”失败。中央红军主力8.6万人趁着夜色跨过于都河，被迫实行战略转移。没有欢送，只有夜色与秋风，这是一场向着未知的悲壮远征，却意外成为了中国命运的伟大转折。</p>
+                        <h3>过雪山草地 · 挑战人类生存极限的悲壮行军</h3>
+                        <p>甩开了敌兵的重重围堵，红军却迎来了长征途中最残酷的“自然之敌”。皑皑雪山，飞鸟绝迹；茫茫草地，暗藏杀机。在这里，夺走战士生命的不再是枪林弹雨，而是极寒、缺氧与饥饿。这是一场没有硝烟的战争，是凭借纯粹的信仰与钢铁意志，一步步生生蹚出来的生存奇迹。</p>
+                    </div>
+                </div>
+                <div class="xuecao-scroll-container">
+                    <div class="xueshan-card show">
+                        <div class="main-card">
+                            <img src="resources/img/待定.png" alt="长征出发">
+                            <div class="card-content xuecao-card-container">
+                                <h3>过雪山 · 飞鸟绝迹的死亡之巅</h3>
+                                <p>海拔四千多米的夹金山，终年积雪，空气稀薄。绝大多数南方籍的红军战士，身上只有单薄的秋衣和磨破的草鞋，迎着零下二三十度的狂风暴雪艰难跋涉。在这里，没有震耳欲聋的枪炮声，只有令人窒息的寂静与极寒。高海拔缺氧让人头痛欲裂，一旦有人因体力不支坐下喘息，寒气便会瞬间冻僵血液，化作雪山上永远的路标。这不仅是一次行军，更是一场凭借纯粹信仰与残酷自然展开的殊死搏斗。</p>
+                            </div>
+                        </div>
+                        <div class="xuecao-detail">
+                            <div class="xuecao-detail-card">
+                                <h4>单衣与草鞋</h4>
+                                <p>面对海拔 4000 多米、气温零下二三十度的夹金山，绝大多数南方籍红军战士身上只有单薄的秋衣和破烂的草鞋，连御寒的辣椒都成了奢侈的救命药。</p>
+                            </div>
+                            <div class="xuecao-detail-card">
+                                <h4>坐下即永别</h4>
+                                <p>高海拔缺氧让人头痛欲裂、呼吸困难。在冰雪中，一旦有人因体力不支坐下休息，极寒瞬间就会冻僵血液，再也无法站起，化作雪山上永远的路标。</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="caodi-card">
+                        <div class="main-card">
+                            <img src="resources/img/待定.png" alt="长征出发">
+                            <div class="card-content xuecao-card-container">
+                                <h3>过草地 · 吞噬生命的绿色深渊</h3>
+                                <p>广袤的松潘草地看似平静，实则遍布着致命的黑水与淤泥。在这片方圆数百里连一棵树都找不到的荒野中，红军迎来了比雪山更令人绝望的考验——断粮与泥沼。干粮耗尽后，挖野草、吃树皮，甚至将随身的皮带和马鞍用水煮软切碎吞下，只为能再往前迈出一步。狂风暴雨的寒夜里，找不到一块干燥的平地，战士们只能背靠背坐在冰冷的泥水中取暖。无数年轻的生命没有倒在敌人的枪口下，却永远沉睡在了这片苍茫的野草之中。</p>
+                            </div>
+                        </div>
+                        <div class="xuecao-detail">
+                            <div class="xuecao-detail-card">
+                                <h4>吃人的泥沼</h4>
+                                <p>广袤的松潘草地看似平静，实则遍布致命的黑水淤泥。一旦踩破草皮陷进去，越挣扎陷得越深，战友们只能眼睁睁看着彼此被无情的泥沼吞没。</p>
+                            </div>
+                            <div class="xuecao-detail-card">
+                                <h4>皮带与草根</h4>
+                                <p>茫茫草地荒无人烟，干粮耗尽后，红军只能靠挖野菜、吃草根维生。当野菜也被挖光，战士们甚至将皮带、马鞍用水煮软后切碎吞下，只为能再往前走一步。</p>
+                            </div>
+                            <div class="xuecao-detail-card">
+                                <h4>背靠背的寒夜</h4>
+                                <p>广袤的沼泽中找不到一块干燥的宿营地。狂风暴雨的夜晚，战士们只能背靠背坐在冰冷的泥水里，用彼此的体温扛过漫漫长夜。</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="guocao-nav-container">
+                        <button class="left-btn">
+                            <svg class="flip-svg" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M385.536 102.4l398.848 364.544c12.288 10.752 19.456 26.624 19.456 43.008s-7.168 32.256-19.456 43.008l-398.848 364.544c-18.944 17.92-46.08 23.552-70.656 14.336s-40.96-31.232-43.52-57.344V145.408c2.048-26.112 18.944-48.128 43.52-57.344 24.064-9.216 51.712-3.584 70.656 14.336z" fill="#ffffff"></path>
+                            </svg>
+                        </button>
+                        <div>
+                            <div class="nav-ball"></div>
+                            <div class="nav-ball"></div>
+                        </div>
+                        <button class="right-btn">
+                            <svg class="svg" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M385.536 102.4l398.848 364.544c12.288 10.752 19.456 26.624 19.456 43.008s-7.168 32.256-19.456 43.008l-398.848 364.544c-18.944 17.92-46.08 23.552-70.656 14.336s-40.96-31.232-43.52-57.344V145.408c2.048-26.112 18.944-48.128 43.52-57.344 24.064-9.216 51.712-3.584 70.656 14.336z" fill="#ffffff"></path>
+                            </svg>
+                        </button>
                     </div>
                 </div>
             </article>
+            <h2 class="chapter-title" id="chapter6">会宁会师</h2>
+            <article class="article-huining" id="huining-section">
+                <div class="main-card" id="card5">
+                    <img src="resources/img/待定.png" alt="长征出发">
+                    <div class="card-content">
+                        <h3>三军大会师 · 照亮革命的黎明</h3>
+                        <p>1936年10月，历经两年多辗转大半个中国的九死一生，红一、红二、红四方面军终于在甘肃会宁和宁夏将台堡胜利会师。当衣衫褴褛却目光如炬的战友们紧紧相拥、喜极而泣时，这段跨越14个省、长达两万五千里的史诗远征，终于画上了震撼世界的句号。长征结束了，但长征精神的火种，才刚刚燎原。</p>
+                    </div>
+                </div>
+
+
+                <div class="huining-cards">
+                    <div class="h-card">
+                        <h4>红旗漫卷</h4>
+                        <p>会宁城头，红旗漫卷。当不同番号的部队相见时，许多人甚至连名字都叫不出，只是死死抱在一起痛哭。他们有的失去了双腿，有的满身伤痕，但每个人身上都闪耀着一种不可战胜的光芒。</p>
+                    </div>
+                    <div class="h-card">
+                        <h4>三军铁流</h4>
+                        <p>虽历经惨烈的减员，但在会师的这一刻，三支钢铁洪流汇聚成了一股无坚不摧的力量。中国共产党和红军在这场残酷的淘汰赛中浴火重生，锻造出了一支千锤百炼的核心队伍。</p>
+                    </div>
+                    <div class="h-card highlight">
+                        <h4>两万五千里</h4>
+                        <p>击退百万穷追猛打的敌军，翻越18座连绵起伏的雪山，渡过24条汹涌澎湃的河流……这个不可思议的数字，从此成为了人类挑战自身极限、追求崇高理想的永恒代名词。</p>
+                    </div>
+                </div>
+            </article>
+            <div class="cite-wrapper" id="end-cite">
+                <div class="quote-wrapper">
+                    <blockquote onclick="window.location.href='page3.html'" class="quote" id="end-quote">
+                        <p>时空流转，青春的考卷已交到我们手中。
+没有硝烟，却有同样需要跨越的‘雪山’与‘草地’。我们的长征，正写在祖国的大地上，写在每一个不甘平庸的选择里。</p>
+                        <cite>点击卡片，听听新时代青年的回声</cite>
+                    </blockquote>
+                </div>
+            </div>
         </div>
     </main>
     <script src="js/page2.js"></script>

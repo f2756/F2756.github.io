@@ -9,7 +9,9 @@
 * {
     box-sizing: border-box;
 }
-
+html {
+  scroll-behavior: smooth;
+}
 body {
     margin: 0;
     min-height: 100vh;
@@ -19,7 +21,13 @@ body {
         radial-gradient(circle at top, rgba(197, 148, 101, 0.22), transparent 36%),
         linear-gradient(180deg, #ede1cd 0%, var(--bg) 38%, #f8f3ea 100%);
     /* background-color: black; */
+
+    overflow-x: hidden;
 }
+h2 {
+    scroll-margin-top: 128px; /*点导航栏时跳转到h2标题上方*/
+}
+
 /*侧边栏*/
 .route-wrapper {
     position: fixed;
@@ -31,6 +39,11 @@ body {
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.route-wrapper.show {
+    opacity: 1;
+    visibility: visible;
 }
 .route-img {
     opacity: 0;
@@ -318,7 +331,7 @@ body {
 .first-content {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 0;
 }
 
 .follow-content {
@@ -335,14 +348,17 @@ body {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
-    max-height: 10000px;
+    max-height: none;
     margin-top: 30px;
-    transition: all 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition: opacity 0.8s cubic-bezier(0.25, 0.8, 0.25, 1),
+                visibility 0.8s cubic-bezier(0.25, 0.8, 0.25, 1),
+                transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1),
+                margin-top 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
     position: relative;
 
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 0;
 
     overflow: visible;
 }
@@ -514,7 +530,7 @@ body {
 /* 顶部时间轴 */
 .timeline-container {
     position: absolute;
-    top: 350px;
+    top: min(350px,15vh);
     left: 10%;
     width: 80%;
     z-index: 10;
@@ -655,7 +671,7 @@ body {
     color: #666;
 }
 /* 引言 */
-.gap {
+.cite-wrapper {
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -671,7 +687,7 @@ body {
     justify-content: center;
     align-items: center;
 }
-.sidu-quote {
+.quote {
     position: relative;
     max-width: 800px;
     margin: 0;
@@ -686,34 +702,35 @@ body {
     transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
-.sidu-quote:hover {
+.quote:hover {
     transform: translateY(-5px);
     box-shadow: 0 20px 45px rgba(63, 37, 21, 0.12);
 }
 
-.sidu-quote::before {
+.quote::before {
     content: '“';
     position: absolute;
     top: -20px;
     left: 20px;
-    font-size: 160px; /* 极具视觉冲击力的巨大字号 */
-    font-family: "Georgia", serif; /* 强制使用衬线体，更有引用的感觉 */
+    font-size: 160px; 
+    font-family: "Georgia", serif; /* 强制使用衬线体 */
     color: rgba(159, 90, 47, 0.1); /* 主题色，极低透明度作为水印底纹 */
     line-height: 1;
     z-index: 0;
     pointer-events: none;
 }
-.sidu-quote p {
+.quote p {
     position: relative;
     z-index: 1; /* 确保文字在巨型引号上方 */
     font-size: 26px;
     font-weight: 900;
-    letter-spacing: 4px; /* 增加字间距，更显大气 */
+    letter-spacing: 4px; /* 增加字间距 */
     margin: 0 0 25px 0;
-    text-shadow: 2px 2px 4px rgba(214, 40, 40, 0.1); /* 微微的红色光晕 */
+    text-shadow: 2px 2px 4px rgba(214, 40, 40, 0.1); /* 微微红色光晕 */
+    color: black;
 }
 
-.sidu-quote cite {
+.quote cite {
     position: relative;
     z-index: 1;
     display: block;
@@ -861,6 +878,427 @@ body {
     text-align: justify;
     color: rgba(255, 248, 239, 0.85);
 }
+/* 飞夺泸定桥 */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(135deg, #090E17 0%, #151719 50%, #1E2226 100%);
+    z-index: -1;
+    opacity: 0;
+    pointer-events: none; 
+    transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1); /* 1.2秒渐变 */
+}
+body.dark-theme::before {
+    opacity: 1;
+}
+body.dark-theme {
+    color: #E2E8F0;
+    --line: rgba(255, 255, 255, 0.15);
+}
+
+
+body.dark-theme .chapter-title {
+    color: #E2E8F0;
+    border-bottom-color: #E2E8F0;
+    text-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
+}
+
+
+body.dark-theme .card-content h3 {
+    border-bottom-color: #E2E8F0;
+}
+
+.luding-speed-section {
+    margin: 40px 0;
+    padding: 40px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    border-left: 4px solid #8B0000;
+}
+.speed-title {
+    font-size: 28px;
+    color: var(--text);
+    margin-bottom: 10px;
+}
+.speed-title span {
+    font-size: 56px;
+    color: #D62828;
+    font-weight: 900;
+    font-style: italic;
+    text-shadow: 0 0 15px rgba(214, 40, 40, 0.4);
+}
+.speed-track {
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    position: relative;
+    margin: 20px 0;
+}
+.speed-progress {
+    position: absolute;
+    top: 0; left: 0;
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #8B0000, #ff4d4d);
+    border-radius: 3px;
+    box-shadow: 0 0 20px rgba(214, 40, 40, 0.8);
+    transition: width 2.5s cubic-bezier(0.2, 0.8, 0.2, 1); /* 2.5秒动画 */
+}
+.speed-markers {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 25px;
+    color: rgba(226, 232, 240, 0.5);
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+.speed-desc {
+    color: rgba(226, 232, 240, 0.8);
+    line-height: 1.8;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+
+.luding-assault-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    margin-bottom: 40px;
+    width: 100%;
+}
+.assault-card {
+    background: linear-gradient(180deg, rgba(20, 22, 25, 0.8) 0%, rgba(30, 34, 38, 0.8) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-top: 4px solid #444;
+    padding: 50px 30px 40px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+.assault-card:hover {
+    transform: translateY(-8px);
+    background: linear-gradient(180deg, rgba(30, 34, 38, 0.9) 0%, rgba(40, 45, 50, 0.9) 100%);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6);
+}
+.assault-card h4 {
+    font-size: 24px;
+    color: #E2E8F0;
+    margin: 0 0 20px 0;
+    letter-spacing: 1px;
+}
+.assault-card p {
+    color: rgba(226, 232, 240, 0.7);
+    line-height: 1.8;
+    font-size: 15px;
+}
+
+.assault-card.highlight {
+    border-top: 4px solid #D62828;
+}
+.assault-card.highlight h4 {
+    color: #D62828;
+}
+
+.chain-decoration {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 36px;
+    height: 20px;
+    border: 5px solid #555;
+    border-radius: 20px 20px 0 0;
+    border-bottom: none;
+}
+.assault-card.highlight .chain-decoration {
+    border-color: #D62828;
+    box-shadow: 0 -5px 15px rgba(214, 40, 40, 0.3);
+}
+/* 过雪山 */
+#snow-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+    pointer-events: none; /* 让鼠标穿透画布 */
+
+    opacity: 0; 
+    transition: opacity 1.5s ease;
+}
+#rain-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+    pointer-events: none; /* 让鼠标穿透画布 */
+
+    opacity: 0; 
+    transition: opacity 1.5s ease;
+}
+
+#rain-canvas.raining {
+    opacity: 1;
+}
+#snow-canvas.snowing {
+    opacity: 1;
+}
+.xuecao-scroll-container {
+    position: relative;
+    margin: 30px 0;
+    width: 100%;
+    overflow: clip;
+    display: grid;
+    grid-template-columns: 1fr;
+    
+    background: linear-gradient(180deg, rgba(20, 25, 30, 0.7) 0%, rgba(10, 12, 15, 0.9) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(0, 0, 0, 0.5);
+    transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+.xueshan-card.show .xuecao-scroll-container {
+    border-top: 4px solid #8e9eab;
+}
+.caodi-card.show .xuecao-scroll-container {
+    border-top: 4px solid #4a5d4e;
+}
+
+.xueshan-card .main-card, 
+.caodi-card .main-card {
+    width: 50%; /* 缩小图片宽度 */
+    height: 450px; /* 设定高度，形成宽幅画面感 */
+    margin: 0 auto 40px auto; /* 居中对齐，并与下方细节卡片拉开距离 */
+    border: 8px solid rgba(255, 255, 255, 0.05); /* 半透明内边框，模拟画框 */
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6); /* 深邃的阴影 */
+}
+
+.xueshan-card, .caodi-card {
+    grid-row: 1;
+    grid-column: 1;
+    transition: all 0.5s ease;
+}
+.xueshan-card {
+    transform: translateX(-200%);
+    visibility: hidden;
+    opacity: 0;
+}
+
+.caodi-card {
+    transform: translateX(200%);
+    visibility: hidden;
+    opacity: 0;
+}
+.xueshan-card.show, .caodi-card.show{
+    transform: translateX(0);
+    visibility: visible;
+    opacity: 1;
+}
+
+.xuecao-detail {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 30px;
+    margin: 30px 0;
+    width: 100%;
+    text-align: center;
+}
+.xuecao-detail-card {
+    background: linear-gradient(180deg, rgba(20, 22, 25, 0.8) 0%, rgba(30, 34, 38, 0.8) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-top: 4px solid #444;
+    padding: 50px 30px 40px;
+    position: relative;
+    transition: all 0.3s ease;
+    flex: 1;
+}
+.xuecao-detail-card h4 {
+    font-size: 24px;
+    color: #E2E8F0;
+    margin: 0 0 20px 0;
+    letter-spacing: 1px;
+}
+.xuecao-detail-card p {
+    color: rgba(226, 232, 240, 0.7);
+    line-height: 1.8;
+    font-size: 15px;
+}
+
+.guocao-nav-container {
+    grid-row: 2;
+    grid-column: 1;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+}
+
+.guocao-nav-container button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.guocao-nav-container svg {
+    width: 40px;
+    height: 40px;
+    display: block;
+}
+
+.flip-svg {
+    transform: scaleX(-1);
+}
+
+.guocao-nav-container > div {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+.nav-ball {
+    width: 15px;
+    height: 15px;
+    background-color: rgba(255, 255, 255, 0.35);
+    border-radius: 50%;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.nav-ball.active {
+    background-color: #ffffff;
+    transform: scale(1.2);
+}
+
+.xuecao-detail-card:hover {
+    transform: translateY(-8px);
+    background: linear-gradient(180deg, rgba(30, 34, 38, 0.9) 0%, rgba(40, 45, 50, 0.9) 100%);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6);
+}
+
+/* 会宁会师 */
+.article-huining {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+
+
+/* 铺设底层日出幕布 */
+body::after {
+    content: "";
+    position: fixed; 
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(to top, #ff7e5f 0%, #feb47b 100%);
+    z-index: -1; 
+    opacity: 0;  
+    pointer-events: none; 
+    transition: opacity 5s ease;
+}
+
+/* 日出显现 */
+body.sunrise-theme::after {
+    opacity: 1;
+}
+body.sunrise-theme::before {
+    transition: opacity 5s ease;
+}
+body.dark-theme::after {
+    transition: opacity 1.2s ease;
+}
+body {
+    transition: color 1.2s ease; /* 默认切换速度 1.2 秒 */
+}
+
+/* 全局文字变色 */
+body.sunrise-theme {
+    color: #ffffff; 
+    --text: #ffffff; 
+    --line: rgba(255, 255, 255, 0.3); 
+    transition: color 5s ease;
+}
+
+body.sunrise-theme .chapter-title {
+    color: #ffffff;
+    border-bottom-color: #ffffff;
+    text-shadow: 0 2px 10px rgba(214, 40, 40, 0.3); /* 微微的发光 */
+}
+
+/* 展示卡片 */
+.huining-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    width: 100%;
+    margin-top: 40px;
+}
+.h-card {
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(214, 40, 40, 0.15);
+    border-top: 4px solid #D62828;
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(63, 37, 21, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.h-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(214, 40, 40, 0.15);
+}
+.h-card h4 {
+    color: #D62828;
+    font-size: 24px;
+    margin: 0 0 20px 0;
+}
+.h-card p {
+    color: #4a3a31;
+    line-height: 1.8;
+    font-size: 15px;
+}
+/* 总结卡 */
+.h-card.highlight {
+    background: linear-gradient(135deg, #D62828, #b91d1d);
+    border-top: none;
+    color: #fff;
+}
+.h-card.highlight h4, 
+.h-card.highlight p {
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/*末尾*/
+#end-quote {
+    cursor: pointer;
+}
+#end-quote cite {
+    text-align: center;
+    font-style: normal;
+}
+
+@media (max-width: 900px) {
+    .huining-cards { grid-template-columns: 1fr; }
+}
+
+
+@media (max-width: 900px) {
+    .luding-assault-container { grid-template-columns: 1fr; }
+}
+
 
 @media (max-width: 840px) {
     .main-content {

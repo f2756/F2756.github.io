@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>红军会师 - 中国地图动画</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* 用于占位，模拟用户滚动 */
+        .spacer {
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #ddd;
+        }
+
+        /* 地图容器 */
+        #map-container {
+            width: 80%; /* 调整地图大小 */
+            max-width: 1000px;
+            height: 80vh; /* 地图区域高度 */
+            position: relative;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            overflow: hidden; /* 裁剪发光效果 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* SVG 地图样式 */
+        #china-map {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* 地图轮廓样式 - 抽象线条 */
+        .map-outline {
+            fill: none;
+            stroke: #ccc;
+            stroke-width: 1;
+        }
+
+        /* 方面军路线基础样式 - 红色发光 */
+        .army-line {
+            fill: none;
+            stroke: red;
+            stroke-width: 3;
+            stroke-linecap: round;
+            filter: drop-shadow(0 0 5px rgba(255, 0, 0, 0.8)); /* 红色发光 */
+            /* 初始状态：通过 stroke-dashoffset 隐藏 */
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        /* 当动画开始时，线条可见 */
+        .animate-lines .army-line {
+            opacity: 1;
+        }
+
+        /* 会宁点位 */
+        #huining-marker {
+            fill: #ff4500;
+            stroke: #fff;
+            stroke-width: 1;
+        }
+
+        /* 金色光芒爆裂效果 */
+        #golden-burst {
+            position: absolute;
+            width: 50px; /* 初始大小 */
+            height: 50px;
+            background: radial-gradient(circle, rgba(255,215,0,1) 0%, rgba(255,165,0,0) 70%);
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0); /* 居中并缩小 */
+            opacity: 0;
+            filter: blur(5px) drop-shadow(0 0 15px rgba(255, 215, 0, 1));
+            pointer-events: none; /* 防止遮挡交互 */
+        }
+
+        /* 金色光芒爆裂动画 */
+        @keyframes burstAnimation {
+            0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+            50% { transform: translate(-50%, -50%) scale(10); opacity: 1; filter: blur(2px) drop-shadow(0 0 30px rgba(255, 215, 0, 1)); }
+            100% { transform: translate(-50%, -50%) scale(20); opacity: 0; }
+        }
+
+        /* 触发动画的类 */
+        .trigger-burst #golden-burst {
+            animation: burstAnimation 1.5s ease-out forwards;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="spacer">
+        <h1>向下滚动查看地图...</h1>
+    </div>
+
+    <div id="map-container">
+        <svg id="china-map" viewBox="0 0 1000 800">
+            <defs>
+                <filter id="strong-glow" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+                    <feMerge>
+                        <feMergeNode in="coloredBlur"/>
+                        <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                </filter>
+            </defs>
+
+            <path class="map-outline" d="M165,348 C185,301 236,298 261,257 C286,216 295,152 353,152 C411,152 429,207 483,212 C537,217 618,206 636,171 C654,136 675,99 725,108 C775,117 810,183 806,216 C802,249 762,284 737,284 C712,284 661,282 638,309 C615,336 635,394 656,419 C677,444 701,481 681,510 C661,539 618,555 567,564 C516,573 487,605 450,605 C413,605 385,583 358,609 C331,635 348,688 300,705 C252,722 216,739 178,705 C140,671 161,634 140,610 C119,586 78,565 65,510 C52,455 83,415 110,397 C137,379 145,395 165,348 Z" />
+
+            <circle id="huining-marker" cx="450" cy="480" r="6" />
+
+            <path id="army-1" class="army-line" d="M780,580 C700,560 600,520 450,480" />
+            <path id="army-2" class="army-line" d="M500,720 C480,680 470,600 450,480" />
+            <path id="army-4" class="army-line" d="M250,600 C300,580 380,530 450,480" />
+        </svg>
+
+        <div id="golden-burst"></div>
+    </div>
+
+    <div class="spacer">
+        <h1>...滚动结束</h1>
+    </div>
+
+    <script>
+        // 获取元素
+        const mapContainer = document.getElementById('map-container');
+        const lines = document.querySelectorAll('.army-line');
+        const huiningMarker = document.getElementById('huining-marker');
+        const goldenBurst = document.getElementById('golden-burst');
+
+        // 1. 设置 SVG 线条的初始 dasharray 和 dashoffset 
+        // 我们需要动态获取线条的长度
+        lines.forEach(line => {
+            const length = line.getTotalLength();
+            // 设置一个足够大的值
+            line.style.strokeDasharray = length;
+            line.style.strokeDashoffset = length;
+        });
+
+        // 2. 调整金色光芒的初始位置到 SVG 会宁点位
+        // 需要将 SVG 坐标转换为屏幕百分比位置
+        const svg = document.getElementById('china-map');
+        const point = svg.createSVGPoint();
+        point.x = parseFloat(huiningMarker.getAttribute('cx'));
+        point.y = parseFloat(huiningMarker.getAttribute('cy'));
+        
+        // CTM (Current Transformation Matrix) 提供了 SVG 坐标到屏幕坐标的转换
+        const ctm = huiningMarker.getScreenCTM();
+        if (ctm) {
+            const screenPoint = point.matrixTransform(ctm);
+            // 这里我们用绝对定位相对于容器，所以需要相对于容器的位置
+            // 简单的方法是相对于容器居中，然后微调，或者直接计算相对于容器左上角的百分比
+            // 下面的方法计算相对于 viewBox 的百分比，然后应用
+            const viewBox = svg.viewBox.baseVal;
+            const percentX = (point.x / viewBox.width) * 100;
+            const percentY = (point.y / viewBox.height) * 100;
+            goldenBurst.style.left = `${percentX}%`;
+            goldenBurst.style.top = `${percentY}%`;
+        } else {
+            // 备选：如果无法获取 CTM (比如初始隐藏)，根据 viewBox 比例手动设置
+            goldenBurst.style.left = '45%'; // 450 / 1000
+            goldenBurst.style.top = '60%'; // 480 / 800
+        }
+
+
+        // 3. 定义 Intersection Observer 的回调函数
+        const onIntersection = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    console.log('地图进入视野，开始动画');
+                    // 标记线条开始动画（使其可见）
+                    mapContainer.classList.add('animate-lines');
+
+                    // 4. 开始线条蔓延动画
+                    lines.forEach((line, index) => {
+                        // 使用 Web Animations API 提供更精确的控制
+                        line.animate(
+                            [
+                                { strokeDashoffset: line.getTotalLength() },
+                                { strokeDashoffset: 0 }
+                            ],
+                            {
+                                duration: 1500, // 快速蔓延，1.5秒
+                                easing: 'ease-out',
+                                fill: 'forwards',
+                                delay: index * 100 // 可选：让三条线稍有先后，增加层次感
+                            }
+                        );
+                    });
+
+                    // 5. 在线条汇合后触发金色光芒爆裂
+                    // 我们在最长的动画结束后触发爆裂。
+                    // 这里的 1500ms 对应线条动画的 duration。
+                    setTimeout(() => {
+                        console.log('线条汇合，触发爆裂');
+                        mapContainer.classList.add('trigger-burst');
+                    }, 1500); 
+
+                    // 动画只触发一次，之后停止观察
+                    observer.unobserve(entry.target);
+                }
+            });
+        };
+
+        // 6. 创建 Observer 实例
+        // rootMargin: '-10% 0px' 表示在进入视野 10% 后触发
+        const observer = new IntersectionObserver(onIntersection, {
+            root: null, // 默认使用视口
+            rootMargin: '-10% 0px',
+            threshold: 0.1 // 目标元素 10% 可见时触发
+        });
+
+        // 7. 开始观察地图容器
+        observer.observe(mapContainer);
+
+    </script>
+</body>
+</html>
