@@ -238,7 +238,7 @@ body {
     max-width: 900px;
     width: 100%;
 }
-/* 中间的发光主轴 */
+/* 发光主轴 */
 .modern-timeline::after {
     content: '';
     position: absolute;
@@ -300,6 +300,153 @@ body {
 .timeline-content h4 { color: #fff; font-size: 22px; margin: 0 0 15px 0; }
 .timeline-content p { color: rgba(226, 232, 240, 0.7); line-height: 1.8; font-size: 15px; margin: 0; }
 
+/* 粘性滚动切换 */
+.sticky-scroll-container {
+    height: 375vh;
+    position: relative;
+    width: 100%;
+    margin: 80px 0;
+}
+.sticky-viewport {
+    position: sticky;
+    top: 80px;
+    height: calc(100vh - 120px);
+    width: 100%;
+
+    background: rgba(21, 23, 25, 0.7);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+    padding: 20px 0;
+}
+.sticky-area-title {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    z-index: 10;
+    text-align: center;
+}
+.sticky-area-title h2, .sticky-area-title p {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -20px); /* 默认偏上一点，用于入场动画 */
+    width: 80%;
+    opacity: 0;
+    visibility: hidden;
+    margin: 0;
+    transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+.sticky-area-title h2 {
+    top: 0;
+    font-size: 34px;
+    color: #D62828;
+    letter-spacing: 4px;
+    text-shadow: 0 4px 15px rgba(214, 40, 40, 0.3);
+}
+.sticky-area-title h2.active, .sticky-area-title p.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, 0); /* 归位 */
+}
+
+.sticky-area-title p {
+    top: 55px; /* 排在 h2 下方 */
+    font-size: 18px;
+    color: rgba(226, 232, 240, 0.9);
+    letter-spacing: 1px;
+    transition-delay: 0.05s; /* 描述文字比主标题晚一点点出现，增加层次感 */
+}
+.sticky-area {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    position: relative; 
+    padding-top: 80px;
+}
+.sticky-area.left {
+    margin-left: 15px;
+}
+.sticky-area.right {
+    margin-right: 15px;
+}
+.vertical-dashed-line {
+    border-left: 2px dashed rgba(255, 255, 255, 0.15);
+    height: 80%;
+    margin: 0 10px;
+    margin-top: 10%;
+}
+.sticky-text-area, .sticky-img-area {
+    width: 100%;
+    flex: 1; 
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10%;
+}
+.scroll-card, .scroll-img {
+    position: absolute;
+    left: 50%;
+    width: 90%;
+    transform: translate(-50%, calc(-50% + 15px)) scale(0.98);
+    text-align: left;
+
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+.scroll-card {
+    top: 50%;
+    transform: translate(-50%, calc(-50% + 15px)) scale(0.98);
+}
+.scroll-img {
+    top: 30%;
+    max-height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+.scroll-card.active, .scroll-img.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%) scale(1);
+}
+.scroll-card h2 {
+    font-size: 32px;
+    color: #D62828;
+    margin: 0 0 15px 0;
+    padding-bottom: 10px;
+    border-bottom: 2px solid rgba(214, 40, 40, 0.4);
+    display: inline-block;
+    letter-spacing: 2px;
+}
+
+.scroll-card h3 {
+    font-size: 20px;
+    color: #E2E8F0;
+    margin: 0 0 20px 0;
+    font-weight: 500;
+}
+
+.scroll-card p {
+    font-size: 16px;
+    line-height: 1.8;
+    color: rgba(226, 232, 240, 0.7);
+    margin: 0;
+    text-align: justify;
+}
 
 /* 大页脚 */
 .site-footer {

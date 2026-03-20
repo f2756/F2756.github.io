@@ -111,6 +111,7 @@ if (sparkCanvas) {
                     sparks[i].x = Math.random() * w;
                     sparks[i].alpha = 1;
                     sparks[i].vy = -(Math.random() * 1 + 0.5);
+                    sparks[i].vx = (Math.random() - 0.5) * 1.5;
                 }
             }
         }
@@ -192,3 +193,58 @@ if (backToTopBtn) {
         });
     });
 }
+//粘性滚动切换
+const stickyContainer = document.getElementById('sticky-container');
+const scrollCards = document.querySelectorAll('.scroll-card');
+const scrollImgs = document.querySelectorAll('.scroll-img');
+
+// 新增：获取全局共享的主标题和副标题
+const titleH2s = document.querySelectorAll('.sticky-area-title h2');
+const titlePs = document.querySelectorAll('.sticky-area-title p');
+
+window.addEventListener('scroll', () => {
+    if(!stickyContainer) return;
+    const rect = stickyContainer.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+    
+    if (rect.top <= 0 && rect.bottom >= windowHeight) {
+        const scrolledDistance = Math.abs(rect.top);
+        const totalScrollable = rect.height - windowHeight;
+        let progress = scrolledDistance / totalScrollable;
+        
+        const totalCards = scrollCards.length / 2;
+        let currentIndex = Math.floor(progress * totalCards);
+        if (currentIndex >= totalCards) {
+            currentIndex = totalCards - 1;
+        }
+        
+        // 1. 更新卡片状态
+        scrollCards.forEach((card, index) => {
+            if (index === currentIndex || index === currentIndex + 5) {
+                card.classList.add('active');
+            } else {
+                card.classList.remove('active');
+            }
+        });
+        
+        // 2. 更新图片状态
+        scrollImgs.forEach((img, index) => {
+            if (index === currentIndex || index === currentIndex + 5) {
+                img.classList.add('active');
+            } else {
+                img.classList.remove('active');
+            }
+        });
+
+        // 3. 更新全局标题状态
+        titleH2s.forEach((h2, index) => {
+            if (index === currentIndex) h2.classList.add('active');
+            else h2.classList.remove('active');
+        });
+        
+        titlePs.forEach((p, index) => {
+            if (index === currentIndex) p.classList.add('active');
+            else p.classList.remove('active');
+        });
+    }
+});
